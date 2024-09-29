@@ -35,12 +35,35 @@ namespace ConsoleApp14
             Console.Write("Enter your fullname:");
             Console.ResetColor();
             string fullname = Console.ReadLine();
+            string cod = "";
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("Enter your National cod:");
+                Console.ResetColor();
+                 cod = Console.ReadLine();
+               
+                if(cod.Length == 10)
+                {
+                    break;
+                    Pause();
+
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Not National cod !!");
+                    Pause();
+                    Console.Clear();
+                }
+            }
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("Enter your email:");
             Console.ResetColor();
             string email = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("Enter your users name:");
+            Console.Write("Enter your user name:");
             Console.ResetColor();
             string username = Console.ReadLine();
             string password = "";
@@ -53,7 +76,7 @@ namespace ConsoleApp14
                 if(password.Length >= 4)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("password Done");
+                    Console.WriteLine("Password Done");
                     Console.ResetColor();
                     break;
                     Pause();
@@ -62,13 +85,13 @@ namespace ConsoleApp14
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("not password!!");
+                    Console.WriteLine("Not Password!!");
                     Pause();
                     Console.Clear();
                 }
             }
             Console.Clear();
-            users.Add(new User { Email = email , FullName = fullname, Username = username, Password = Hash(password)});
+            users.Add(new User { Email = email ,  Cod = cod ,FullName = fullname, Username = username, Password = Hash(password)});
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"SingUp Done, Welcome {username}");
             Console.ResetColor();
@@ -79,7 +102,7 @@ namespace ConsoleApp14
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("Enter your users name:");
+            Console.Write("Enter your user name:");
             Console.ResetColor();
             string username = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -91,7 +114,7 @@ namespace ConsoleApp14
                 if (user.Username == username && user.Password == Hash(password))
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("login done, welkome");
+                    Console.WriteLine("login done, welcome");
                     Console.ResetColor();
                     Pause();
                     profail(user);
@@ -99,7 +122,7 @@ namespace ConsoleApp14
                 }
             }
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Invalid username or passwor.");
+            Console.WriteLine("Invalid username or password.");
             Console.ResetColor();
             Pause();
         }
@@ -110,8 +133,9 @@ namespace ConsoleApp14
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine($"Welcom to your profaile, {user.FullName}!");
-                Console.WriteLine($"your username is: {user.Username}");
-                Console.WriteLine($"your password is: {new string('*',user.Password.Length)}");
+                Console.WriteLine($"Your cod irani is: {user.Cod}");
+                Console.WriteLine($"Your username is: {user.Username}");
+                Console.WriteLine($"Your password is: {new string('*',user.Password.Length)}");
                 Console.WriteLine($"Your email is: {user.Email}");
                 Console.ResetColor();
                 Console.WriteLine("");
@@ -187,6 +211,7 @@ namespace ConsoleApp14
 class User
 {
     public string Email { get; set; }
+    public string Cod {  get; set; }
     public string FullName { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
